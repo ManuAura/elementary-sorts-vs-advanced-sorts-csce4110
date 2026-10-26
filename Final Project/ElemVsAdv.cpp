@@ -27,7 +27,7 @@ int main(){
 
     // Set default for random array
     for (int i = 0; i < n; i++){
-        randArr.push_back(rand() % (n + 1)); // random from 0 - n
+        randArr.push_back(rand() % (n + 1)); // random from 0 - 100
     }
 
     while(true){
@@ -41,7 +41,7 @@ int main(){
             cin.clear();
             cin.ignore(1000, '\n');
             cout << "\nInvalid input, please enter a number." << endl;
-            continue;
+            continue; // failure
         }
 
         // Choose selection
@@ -59,7 +59,7 @@ int main(){
                 cout << "]\n";
                 cout << "Current n elements for random array: " << n << "\n";
 
-                break;
+                break; // success
 
             }
 
@@ -69,25 +69,81 @@ int main(){
                 // temp variables
                 int element;
                 vector<int> temp(10);
+                bool failure = false;
 
                 // prompt new array
-                cout << "\n------- Input new fixed array -------\n";
+                cout << "\n-------  Input new fixed array  -------\n";
                 for (int i = 0; i < 10; i++){
                     cout << "Enter integer value for element " << i + 1 << ": ";
                     cin >> element; 
+
+                    // validate input
+                    if (cin.fail()){
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        cout << "\nInvalid input, returning to menu. No changes made." << endl;
+                        failure = true;
+                        break; // failure
+                    }
+
                     temp[i] = element;
                 }
 
-                fixedArr = temp; // change fixed array
+                // if valid
+                if (!failure){
+
+                    // change fixed array
+                    fixedArr = temp;
+
+                    // confirm change
+                    cout << "New fixed array: [ ";
+                    for (int i = 0; i < fixedArr.size(); i++){
+                        cout << fixedArr[i] << " ";
+                    }
+                    cout << "]\n";
+                }
+
+                break; // success
+
+            }
+
+            // 3) Generate new array of random numbers 
+            case 3: {
+
+                // temp variables
+                int number;
+                vector<int> temp;
+
+                // prompt new number
+                cout << "\n----  Generate new random numbers  ----\n";
+                cout << "Enter integer number of elements (under 10,000): ";
+                cin >> number;
+
+                // validate input
+                if (cin.fail()){
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    cout << "\nInvalid input, returning to menu. No changes made.\n" << endl;
+                    break; // failure
+                }
+
+                // between 0 - 10,000?
+                if (number < 1 || number > 10000) {
+                    cout << "\nInput out of range, returning to menu. No changes made.\n";
+                    break; // failure
+                }
+
+                // change random array
+                n = number;
+                for (int i = 0; i < n; i++){
+                    temp.push_back(rand() % (n + 1)); // random from 0 - new n + 1
+                }
+                randArr = temp;
 
                 // confirm change
-                cout << "New fixed array: [ ";
-                for (int i = 0; i < fixedArr.size(); i++){
-                    cout << fixedArr[i] << " ";
-                }
-                cout << "]\n";
+                cout << "New n elements for random array is now " << n << "\n";
 
-                break;
+                break; // success
 
             }
 
@@ -95,6 +151,7 @@ int main(){
             case 0: {
 
                 cout << "\nExiting program. Goodbye!\n";
+                cout << "\n";
                 return 0;
 
             }
@@ -103,7 +160,7 @@ int main(){
             default: {
 
                 cout << "\nInvalid input, please choose an option.\n";
-                break;
+                break; // failure
 
             }
         }
