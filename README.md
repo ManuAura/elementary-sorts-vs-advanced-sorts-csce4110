@@ -23,9 +23,9 @@ The goal of this program is to allow the user to compare the elementary sorts (b
 * Correctness check all algorithms with current arrays
 * Exit
 
-## Extra Notes
+## Extra Notes:
 * N/A
 
-## How to run
+## How to run:
 * Compile the ElemVsAdv.pp file, make sure sorts.h and sorts.cpp are in the same folder
 * Run executable 
