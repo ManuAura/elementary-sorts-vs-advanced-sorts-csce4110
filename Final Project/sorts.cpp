@@ -5,6 +5,11 @@
 #include "Sorts.h"
 using namespace std;
 
+// Initialize
+long long Sorts::quickSwaps = 0;
+long long Sorts::quickComparisons = 0;
+long long Sorts::mergeComparisons = 0;
+
 // Reset Advanced Sort Counters
 void Sorts::resetMetrics() {
     mergeComparisons = 0;
@@ -18,7 +23,7 @@ void Sorts::bubbleSort(vector<int>& a, int& comparisons, int& swaps, bool correc
 
     // Correctness check: Before
     if (correctness) {
-        cout << "\n===== Bubble Correctness Check =====\n";
+        cout << "\n-----  Bubble Correctness Check  -----\n";
         cout << "Original Array: ";
         for (int num : a) cout << num << " ";
         cout << "\n";
@@ -39,9 +44,9 @@ void Sorts::bubbleSort(vector<int>& a, int& comparisons, int& swaps, bool correc
 
     // Correctness check: After
     if (correctness) {
-        cout << "Sorted Array:  ";
+        cout << "Resulted Array:  ";
         for (int num : a) cout << num << " ";
-        cout << "\n====================================\n";
+        cout << "\n---------------------------------------\n";
     }
 }
 
@@ -51,7 +56,7 @@ void Sorts::selectionSort(vector<int>& a, int& comparisons, int& swaps, bool cor
 
     // Correctness check: Before
     if (correctness) {
-        cout << "\n===== Selection Correctness Check =====\n";
+        cout << "\n----  Selection Correctness Check  ----\n";
         cout << "Original Array: ";
         for (int num : a) cout << num << " ";
         cout << "\n";
@@ -71,9 +76,9 @@ void Sorts::selectionSort(vector<int>& a, int& comparisons, int& swaps, bool cor
 
     // Correctness check: After
     if (correctness) {
-        cout << "Sorted Array:  ";
+        cout << "Resulted Array:  ";
         for (int num : a) cout << num << " ";
-        cout << "\n=======================================\n";
+        cout << "\n---------------------------------------\n";
     }
 }
 
@@ -82,7 +87,7 @@ void Sorts::insertionSort(vector<int>& a, int& comparisons, int& shifts, bool co
     
     // Correctness check: Before
     if (correctness) {
-        cout << "\n===== Insertion Correctness Check =====\n";
+        cout << "\n----  Insertion Correctness Check  ----\n";
         cout << "Original Array: ";
         for (int num : a) cout << num << " ";
         cout << "\n";
@@ -103,9 +108,9 @@ void Sorts::insertionSort(vector<int>& a, int& comparisons, int& shifts, bool co
 
     // Correctness check: After
     if (correctness) {
-        cout << "Sorted Array:  ";
+        cout << "Resulted Array: ";
         for (int num : a) cout << num << " ";
-        cout << "\n=======================================\n";
+        cout << "\n---------------------------------------\n";
     }
 }
 
@@ -141,7 +146,7 @@ void Sorts::mergeCorrectness(vector<int>& a, bool correctness) {
     
     // Correctness check: Before
     if (correctness) {
-        cout << "\n===== Merge Correctness Check =====\n";
+        cout << "\n------  Merge Correctness Check  ------\n";
         cout << "Original Array: ";
         for (int num : a) cout << num << " ";
         cout << "\n";
@@ -154,9 +159,9 @@ void Sorts::mergeCorrectness(vector<int>& a, bool correctness) {
 
     // Correctness check: After
     if (correctness) {
-        cout << "Sorted Array:   ";
+        cout << "Resulted Array: ";
         for (int num : a) cout << num << " ";
-        cout << "\n===================================\n";
+        cout << "\n---------------------------------------\n";
     }
 }
 
@@ -196,7 +201,7 @@ void Sorts::quickCorrectness(vector<int>& a, bool correctness) {
     
     // Correctness check: Before
     if (correctness) {
-        cout << "\n===== Quick Correctness Check =====\n";
+        cout << "\n------  Quick Correctness Check  ------\n";
         cout << "Original Array: ";
         for (int num : a) cout << num << " ";
         cout << "\n";
@@ -209,8 +214,8 @@ void Sorts::quickCorrectness(vector<int>& a, bool correctness) {
 
     // Correctness check: After
     if (correctness) {
-        cout << "Sorted Array:   ";
+        cout << "Resulted Array: ";
         for (int num : a) cout << num << " ";
-        cout << "\n===================================\n";
+        cout << "\n---------------------------------------\n";
     }
 }

@@ -16,14 +16,11 @@ private:
     static long long quickComparisons;
     static long long quickSwaps;
 
-    // Merge Sort
+    // merge
     static void merge(std::vector<int>& a, int left, int mid, int right);
-    static void mergeSort(std::vector<int>& a, int left, int right);
 
-    // Quick Sort
+    // partition
     static int partition(std::vector<int>& a, int low, int high);
-    static void quickSort(std::vector<int>& a, int low, int high);
-
 
 public:
    
@@ -36,11 +33,13 @@ public:
     // Insertion Sort
     static void insertionSort(std::vector<int>& a, int& comparisons, int& shifts, bool correctness = false);
 
-    // Merge Sort extra functions
+    // Merge Sort functions
+    static void mergeSort(std::vector<int>& a, int left, int right); // merge sort
     static void mergeCorrectness(std::vector<int>& a, bool correctness = false); // correctness check
     static long long getMergeComparisons() {return mergeComparisons;} // get merge comparison count
 
-    // Quick Sort extra functions
+    // Quick Sort functions
+    static void quickSort(std::vector<int>& a, int low, int high); // quick sort
     static void quickCorrectness(std::vector<int>& a, bool correctness = false); // correctness check
     static long long getQuickComparisons() { return quickComparisons; } // get quick comparison count
     static long long getQuickSwaps() { return quickSwaps; } // get quick swap count
