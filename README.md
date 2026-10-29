@@ -27,5 +27,6 @@ The goal of this program is to allow the user to compare the elementary sorts (b
 * N/A
 
 ## How to run:
-* Compile the ElemVsAdv.pp file, make sure sorts.h and sorts.cpp are in the same folder
-* Run executable 
+* Compile the ElemVsAdv.cpp file, make sure sorts.h and sorts.cpp are in the same folder:
+* g++ ElemVsAdv.cpp sorts.cpp -o final
+* Run executable
