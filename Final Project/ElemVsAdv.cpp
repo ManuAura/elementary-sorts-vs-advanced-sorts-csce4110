@@ -217,7 +217,7 @@ int main(){
                         Sorts::insertionSort(insertion, compCount, swapCount, false);
                         cout << "\n-----  Insertion Sort Work  -----\n"
                              << "Comparisons = " << compCount
-                             << "\nSwaps = " << swapCount
+                             << "\nShifts = " << swapCount
                              << "\n";
 
                         // Merge Sort work
@@ -289,7 +289,7 @@ int main(){
                         Sorts::insertionSort(insertion, compCount, swapCount, false);
                         cout << "\n-----  Insertion Sort Work  -----\n"
                              << "Comparisons = " << compCount
-                             << "\nSwaps = " << swapCount
+                             << "\nShifts = " << swapCount
                              << "\n";
 
                         // Merge Sort work
