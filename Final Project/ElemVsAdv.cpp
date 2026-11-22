@@ -23,8 +23,11 @@ void printError(const string& message);
 void printInfo(const string& message);
 void printSection(const string& title);
 
-void arrayMenu();
-void sortingMenu();
+void arrayMenu(vector<int>& fixedArr, vector<int>& randArr, int& n);
+void sortingMenu(const vector<int>& fixedArr, const vector<int>& randArr, int n);
+void correctnessMenu(const vector<int>& fixedArr, const vector<int>& randArr, int n);
+
+void printArr(const vector<int>& arr);
 
 
 /* MAIN */
@@ -56,7 +59,7 @@ int main(){
         if (cin.fail()){
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "\nInvalid input, please enter a number." << endl;
+            printError("Invalid input. Please enter a number.");
             continue; // failure
         }
 
@@ -75,175 +78,11 @@ int main(){
 
             
 
-            // 4) Generate outputs for all algorithms
-            case 4: {
+            // Sorting Algorithm Comparison
+            case 2: {
 
-                // fixed array or randomly generated array?
-                cout << "\nWhich array would you like to use?\n"
-                     << " 1. Fixed array\n"
-                     << " 2. Randomly generated array (n elements)\n"
-                     << "Enter Choice: ";
-                cin >> arrChoice;
-
-                // validate input
-                if (cin.fail()){
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    cout << "\nInvalid input, going back to menu." << endl;
-                    break; // failure
-                }
-
-                switch (arrChoice){
-                    
-                    // a) fixed array
-                    case 1: {
-
-                        // output original order
-                        cout << "\nSorting the fixed array: [ ";
-                        for (int i = 0; i < fixedArr.size(); i++){
-                            cout << fixedArr[i] << " ";
-                        }
-                        cout << "]\n";
-
-                        // RESET ALL COUNTERS
-                        compCount = 0;
-                        swapCount = 0;
-                        Sorts::resetMetrics();
-
-                        // copy vectors for algorithms
-                        vector<int> bubble = fixedArr;
-                        vector<int> selection = fixedArr;
-                        vector<int> insertion = fixedArr;
-                        vector<int> merge = fixedArr;
-                        vector<int> quick = fixedArr;
-
-                        // Bubble Sort work
-                        Sorts::bubbleSort(bubble, compCount, swapCount, false);
-                        cout << "\n------  Bubble Sort Work  ------\n"
-                             << "Comparisons = " << compCount
-                             << "\nSwaps = " << swapCount
-                             << "\n";
-                        
-                        // RESET for selection
-                        compCount = 0;
-                        swapCount = 0;
-
-                        // Selection Sort work
-                        Sorts::selectionSort(selection, compCount, swapCount, false);
-                        cout << "\n-----  Selection Sort Work  -----\n"
-                             << "Comparisons = " << compCount
-                             << "\nSwaps = " << swapCount
-                             << "\n";
-
-                        // RESET for insertion
-                        compCount = 0;
-                        swapCount = 0;
-
-                        // Insertion Sort work
-                        Sorts::insertionSort(insertion, compCount, swapCount, false);
-                        cout << "\n-----  Insertion Sort Work  -----\n"
-                             << "Comparisons = " << compCount
-                             << "\nShifts = " << swapCount
-                             << "\n";
-
-                        // Merge Sort work
-                        Sorts::mergeSort(merge, 0, (int)merge.size() - 1);
-                        cout << "\n-------  Merge Sort Work  -------\n"
-                             << "Comparisons = " << Sorts::getMergeComparisons()
-                             << "\nSwaps = Merge does not use swaps"
-                             << "\n";
-
-                        // Quick Sort work
-                        Sorts::quickSort(merge, 0, (int)merge.size() - 1);
-                        cout << "\n-------  Quick Sort Work  -------\n"
-                             << "Comparisons = " << Sorts::getQuickComparisons()
-                             << "\nSwaps = " << Sorts::getQuickSwaps()
-                             << "\n";
-
-                        // output sorted array
-                        cout << "\nSorted Array: [ ";
-                        for (int i = 0; i < bubble.size(); i++){
-                            cout << bubble[i] << " ";
-                        }
-                        cout << "]\n";
-
-                        break; // success
-
-                    }
-
-                    // b) randomized array (n elements)
-                    case 2: {
-
-                        // Output n elements
-                        cout << "\nSorting randomized array with " << n << " elements.\n";
-
-                        // RESET ALL COUNTERS
-                        compCount = 0;
-                        swapCount = 0;
-                        Sorts::resetMetrics();
-
-                        // copy vectors for algorithms
-                        vector<int> bubble = randArr;
-                        vector<int> selection = randArr;
-                        vector<int> insertion = randArr;
-                        vector<int> merge = randArr;
-                        vector<int> quick = randArr;
-
-                        // Bubble Sort work
-                        Sorts::bubbleSort(bubble, compCount, swapCount, false);
-                        cout << "\n------  Bubble Sort Work  ------\n"
-                             << "Comparisons = " << compCount
-                             << "\nSwaps = " << swapCount
-                             << "\n";
-                        
-                        // RESET for selection
-                        compCount = 0;
-                        swapCount = 0;
-
-                        // Selection Sort work
-                        Sorts::selectionSort(selection, compCount, swapCount, false);
-                        cout << "\n-----  Selection Sort Work  -----\n"
-                             << "Comparisons = " << compCount
-                             << "\nSwaps = " << swapCount
-                             << "\n";
-
-                        // RESET for insertion
-                        compCount = 0;
-                        swapCount = 0;
-
-                        // Insertion Sort work
-                        Sorts::insertionSort(insertion, compCount, swapCount, false);
-                        cout << "\n-----  Insertion Sort Work  -----\n"
-                             << "Comparisons = " << compCount
-                             << "\nShifts = " << swapCount
-                             << "\n";
-
-                        // Merge Sort work
-                        Sorts::mergeSort(merge, 0, (int)merge.size() - 1);
-                        cout << "\n-------  Merge Sort Work  -------\n"
-                             << "Comparisons = " << Sorts::getMergeComparisons()
-                             << "\nSwaps = Merge does not use swaps"
-                             << "\n";
-
-                        // Quick Sort work
-                        Sorts::quickSort(merge, 0, (int)merge.size() - 1);
-                        cout << "\n-------  Quick Sort Work  -------\n"
-                             << "Comparisons = " << Sorts::getQuickComparisons()
-                             << "\nSwaps = " << Sorts::getQuickSwaps()
-                             << "\n";
-
-                             break; // success
-
-                    }
-
-                    // invalid input
-                    default: {
-
-                        cout << "\nInvalid input, please choose an option.\n";
-                        break; // failure
-
-                    }
-                }
+                // Go to sorting menu
+                sortingMenu(fixedArr, randArr, n);
 
                 break; // success
 
@@ -404,6 +243,8 @@ int main(){
 
 
 void menu() {
+
+    Utils::clearScreen();
 
     Utils::setColor(Utils::Color::BRIGHT_CYAN);
     cout << "\n";
@@ -669,6 +510,9 @@ void arrayMenu(vector<int>& fixedArr, vector<int>& randArr, int& n) {
 
 void sortingMenu(const vector<int>& fixedArr, const vector<int>& randArr, int n) {
 
+    int compCount; // comparisons || NOTE USE THESE TO RESET before 
+    int swapCount; // swaps/shifts
+    
     while (true) {
 
         Utils::clearScreen();
@@ -696,13 +540,187 @@ void sortingMenu(const vector<int>& fixedArr, const vector<int>& randArr, int n)
 
         switch (choice) {
 
-            case 1:
-                
-                break;
+            case 1: {
 
-            case 2:
+                // print the array
                 
-                break;
+                // RESET ALL COUNTERS
+                    compCount = 0;
+                    swapCount = 0;
+                    Sorts::resetMetrics();
+
+                    // copy vectors for algorithms
+                    vector<int> bubble = fixedArr;
+                    vector<int> selection = fixedArr;
+                    vector<int> insertion = fixedArr;
+                    vector<int> merge = fixedArr;
+                    vector<int> quick = fixedArr;
+
+                    // Bubble Sort work
+                    Sorts::bubbleSort(bubble, compCount, swapCount, false);
+
+                    Utils::setColor(Utils::Color::BRIGHT_BLUE);
+                    cout << "\n------  Bubble Sort Work  ------\n";
+                    Utils::resetColor();
+
+                    cout << "Comparisons = " << compCount << "\n";
+                    cout << "Swaps       = " << swapCount << "\n";
+
+                    // RESET for selection
+                    compCount = 0;
+                    swapCount = 0;
+
+                    // Selection Sort work
+                    Sorts::selectionSort(selection, compCount, swapCount, false);
+
+                    Utils::setColor(Utils::Color::BRIGHT_BLUE);
+                    cout << "\n------  Selection Sort Work  ------\n";
+                    Utils::resetColor();
+
+                    cout << "Comparisons = " << compCount << "\n";
+                    cout << "Swaps       = " << swapCount << "\n";
+
+                    // RESET for insertion
+                    compCount = 0;
+                    swapCount = 0;
+
+                    // Insertion Sort work
+                    Sorts::insertionSort(insertion, compCount, swapCount, false);
+
+                    Utils::setColor(Utils::Color::BRIGHT_BLUE);
+                    cout << "\n------  Insertion Sort Work  ------\n";
+                    Utils::resetColor();
+
+                    cout << "Comparisons = " << compCount << "\n";
+                    cout << "Swaps       = " << swapCount << "\n";
+
+
+                    // Merge Sort work
+                    Sorts::mergeSort(merge, 0, (int)merge.size() - 1);
+
+                    Utils::setColor(Utils::Color::BRIGHT_BLUE);
+                    cout << "\n------  Merge Sort Work  ------\n";
+                    Utils::resetColor();
+
+                    cout << "Comparisons = " << Sorts::getMergeComparisons() << "\n";
+                    cout << "Swaps       = Merge does not use swaps" << "\n";
+
+                    
+
+                    // Quick Sort work
+                    Sorts::quickSort(merge, 0, (int)merge.size() - 1);
+
+                    Utils::setColor(Utils::Color::BRIGHT_BLUE);
+                    cout << "\n------  Quick Sort Work  ------\n";
+                    Utils::resetColor();
+                    
+                    cout    << "Comparisons = " << Sorts::getQuickComparisons() << "\n"
+                            << "Swaps       = " << Sorts::getQuickSwaps() << "\n";
+
+                    // output sorted array
+                    cout << "\nSorted Array: [ ";
+                    for (int i = 0; i < bubble.size(); i++){
+                        cout << bubble[i] << " ";
+                    }
+                    cout << "]\n";
+
+                    break; // success
+
+
+            }
+
+            // b) randomized array (n elements)
+            case 2: {
+
+                // Output n elements
+                cout << "\nSorting randomized array with " << n << " elements.\n";
+
+                // RESET ALL COUNTERS
+                compCount = 0;
+                swapCount = 0;
+                Sorts::resetMetrics();
+
+                // copy vectors for algorithms
+                vector<int> bubble = randArr;
+                vector<int> selection = randArr;
+                vector<int> insertion = randArr;
+                vector<int> merge = randArr;
+                vector<int> quick = randArr;
+
+                // Bubble Sort work
+                Sorts::bubbleSort(bubble, compCount, swapCount, false);
+
+                Utils::setColor(Utils::Color::BRIGHT_BLUE);
+                cout << "\n------  Bubble Sort Work  ------\n";
+                Utils::resetColor();
+
+                cout << "Comparisons = " << compCount << "\n";
+                cout << "Swaps       = " << swapCount << "\n";
+
+                // RESET for selection
+                compCount = 0;
+                swapCount = 0;
+
+                // Selection Sort work
+                Sorts::selectionSort(selection, compCount, swapCount, false);
+
+                Utils::setColor(Utils::Color::BRIGHT_BLUE);
+                cout << "\n------  Selection Sort Work  ------\n";
+                Utils::resetColor();
+
+                cout << "Comparisons = " << compCount << "\n";
+                cout << "Swaps       = " << swapCount << "\n";
+
+                // RESET for insertion
+                compCount = 0;
+                swapCount = 0;
+
+                // Insertion Sort work
+                Sorts::insertionSort(insertion, compCount, swapCount, false);
+
+                Utils::setColor(Utils::Color::BRIGHT_BLUE);
+                cout << "\n------  Insertion Sort Work  ------\n";
+                Utils::resetColor();
+
+                cout << "Comparisons = " << compCount << "\n";
+                cout << "Swaps       = " << swapCount << "\n";
+
+
+                // Merge Sort work
+                Sorts::mergeSort(merge, 0, (int)merge.size() - 1);
+
+                Utils::setColor(Utils::Color::BRIGHT_BLUE);
+                cout << "\n------  Merge Sort Work  ------\n";
+                Utils::resetColor();
+
+                cout << "Comparisons = " << Sorts::getMergeComparisons() << "\n";
+                cout << "Swaps       = Merge does not use swaps" << "\n";
+
+                
+
+                // Quick Sort work
+                Sorts::quickSort(merge, 0, (int)merge.size() - 1);
+
+                Utils::setColor(Utils::Color::BRIGHT_BLUE);
+                cout << "\n------  Quick Sort Work  ------\n";
+                Utils::resetColor();
+                
+                cout    << "Comparisons = " << Sorts::getQuickComparisons() << "\n"
+                        << "Swaps       = " << Sorts::getQuickSwaps() << "\n";
+
+                // output sorted array
+                cout << "\nSorted Array: [ ";
+                for (int i = 0; i < bubble.size(); i++){
+                    cout << bubble[i] << " ";
+                }
+                cout << "]\n";
+
+                break; // success
+
+
+                    
+
+            }
 
             case 0:
                 return;
@@ -717,6 +735,14 @@ void sortingMenu(const vector<int>& fixedArr, const vector<int>& randArr, int n)
 }
 
 
+
+
+void correctnessMenu(const vector<int>& fixedArr, const vector<int>& randArr, int n) {
+
+
+    return;
+
+}
 
 /* TERMINAL UI FUNCTIONS */
 
