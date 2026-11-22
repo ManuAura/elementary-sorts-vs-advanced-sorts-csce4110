@@ -1,0 +1,5 @@
+# Ignore unwanted files from commit
+
+# Ignore exe and out files
+*.exe
+*.out
