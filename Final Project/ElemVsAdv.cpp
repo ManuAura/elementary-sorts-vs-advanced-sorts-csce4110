@@ -7,11 +7,25 @@
 #include <vector>   // vector, size, push_back
 #include <cstdlib>  // rand(), srand()
 #include <ctime>    // time()
+
+#include "utils.h"
+#include <limits>
+
 using namespace std;
 
 /* PROTOTYPE FUNCTIONS */
 void menu(); // menu
 void verify(const vector<int>& a); // verification of sorts
+
+void pauseScreen();
+void printSuccess(const string& message);
+void printError(const string& message);
+void printInfo(const string& message);
+void printSection(const string& title);
+
+void arrayMenu();
+void sortingMenu();
+
 
 /* MAIN */
 int main(){
@@ -475,19 +489,39 @@ int main(){
 
 /* FUNCTION DEFINITIONS */
 // Display Menu
-void menu(){
 
-    cout << "\n===============  Menu  ===============\n"
-         << " 1. View current arrays\n"
-         << " 2. Input new fixed array\n"
-         << " 3. Input n elements of random array\n"
-         << " 4. Display all algorithm results\n"
-         << " 5. Correctness check\n"
-         << " 0. Exit program\n"
-         << "======================================\n"
-         << "Enter Choice: ";
 
+void menu() {
+
+    Utils::setColor(Utils::Color::BRIGHT_CYAN);
+    cout << "\n";
+    cout << "============================================\n";
+    cout << "          SORTING ALGORITHMS                \n";
+    cout << "          ELEMENTARY VS ADVANCED            \n";
+    cout << "============================================\n";
+
+    Utils::resetColor();
+
+    Utils::setColor(Utils::Color::BRIGHT_WHITE);
+    cout << "\n  MAIN MENU\n\n";
+
+    cout << "  1. Array Management\n";
+    cout << "  2. Sorting Algorithm Comparison\n";
+    cout << "  3. Correctness Verification\n";
+    cout << "  0. Exit Program\n";
+
+    Utils::resetColor();
+
+    Utils::setColor(Utils::Color::BRIGHT_CYAN);
+    cout << "\n--------------------------------------------\n";
+    Utils::resetColor();
+
+    Utils::setColor(Utils::Color::BRIGHT_YELLOW);
+    cout << "  Enter Choice: ";
+    Utils::resetColor();
 }
+
+
 
 // Verify sort (for n elements)
 void verify(const vector<int>& a) {
@@ -501,4 +535,155 @@ void verify(const vector<int>& a) {
     }
     // if success
     cout << "Successfully Sorted." << endl;
+}
+
+
+
+
+void arrayMenu(vector<int>& fixedArr, vector<int>& randArr, int& n) {
+
+    while (true) {
+
+        Utils::clearScreen();
+        printSection("ARRAY MANAGEMENT");
+
+        cout << "  1. View Current Arrays\n";
+        cout << "  2. Input New Fixed Array\n";
+        cout << "  3. Generate New Random Array\n";
+        cout << "  0. Back to Main Menu\n";
+
+        Utils::setColor(Utils::Color::BRIGHT_YELLOW);
+        cout << "\n  Enter Choice: ";
+        Utils::resetColor();
+
+        int choice;
+        cin >> choice;
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            printError("Invalid input. Enter a number.");
+            pauseScreen();
+            continue;
+        }
+
+        switch (choice) {
+
+            case 1:
+                // Move your existing case 1 code here.
+                break;
+
+            case 2:
+                // Move your existing case 2 code here.
+                break;
+
+            case 3:
+                // Move your existing case 3 code here.
+                break;
+
+            case 0:
+                return;
+
+            default:
+                printError("Invalid menu option.");
+                break;
+        }
+
+        pauseScreen();
+    }
+}
+
+
+
+
+
+void sortingMenu(const vector<int>& fixedArr, const vector<int>& randArr, int n) {
+
+    while (true) {
+
+        Utils::clearScreen();
+        printSection("SORTING ALGORITHM COMPARISON");
+
+        cout << "  1. Sort Fixed Array\n";
+        cout << "  2. Sort Randomly Generated Array\n";
+        cout << "  0. Back to Main Menu\n";
+
+        Utils::setColor(Utils::Color::BRIGHT_YELLOW);
+        cout << "\n  Enter Choice: ";
+        Utils::resetColor();
+
+        int choice;
+        cin >> choice;
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            printError("Invalid input. Enter a number.");
+            pauseScreen();
+            continue;
+        }
+
+        switch (choice) {
+
+            case 1:
+                
+                break;
+
+            case 2:
+                
+                break;
+
+            case 0:
+                return;
+
+            default:
+                printError("Invalid menu option.");
+                break;
+        }
+
+        pauseScreen();
+    }
+}
+
+
+
+/* TERMINAL UI FUNCTIONS */
+
+// Pause before returning to the previous menu
+void pauseScreen() {
+    cout << "\n";
+    Utils::setColor(Utils::Color::BRIGHT_BLACK);
+    cout << "Press Enter to continue...";
+    Utils::resetColor();
+
+    string temp;
+    getline(cin >> ws, temp);
+}
+
+// Success message
+void printSuccess(const string& message) {
+    Utils::setColor(Utils::Color::BRIGHT_GREEN);
+    cout << "[SUCCESS] " << message << "\n";
+    Utils::resetColor();
+}
+
+// Error message
+void printError(const string& message) {
+    Utils::setColor(Utils::Color::BRIGHT_RED);
+    cout << "[ERROR] " << message << "\n";
+    Utils::resetColor();
+}
+
+// Information message
+void printInfo(const string& message) {
+    Utils::setColor(Utils::Color::BRIGHT_YELLOW);
+    cout << "[INFO] " << message << "\n";
+    Utils::resetColor();
+}
+
+// Section header
+void printSection(const string& title) {
+    Utils::printHeader(title);
 }
