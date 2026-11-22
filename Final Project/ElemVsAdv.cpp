@@ -66,102 +66,14 @@ int main(){
             // 1) Display current arrays
             case 1: {
 
-                // display
-                cout << "\n---------  Current Arrays  ---------\n";
-                cout << "Current fixed array: [ ";
-                for (int i = 0; i < fixedArr.size(); i++){
-                    cout << fixedArr[i] << " ";
-                }
-                cout << "]\n";
-                cout << "Current n elements for random array: " << n << "\n";
+                // Go to array menu
+                arrayMenu(fixedArr, randArr, n);
 
                 break; // success
 
             }
 
-            // 2) Input new fixed array (user input)
-            case 2: {
-
-                // temp variables
-                int element;
-                vector<int> temp(10);
-                bool failure = false;
-
-                // prompt new array
-                cout << "\n-------  Input new fixed array  -------\n";
-                for (int i = 0; i < 10; i++){
-                    cout << "Enter integer value for element " << i + 1 << ": ";
-                    cin >> element; 
-
-                    // validate input
-                    if (cin.fail()){
-                        cin.clear();
-                        cin.ignore(1000, '\n');
-                        cout << "\nInvalid input, returning to menu. No changes made." << endl;
-                        failure = true;
-                        break; // failure
-                    }
-
-                    temp[i] = element;
-                }
-
-                // if valid
-                if (!failure){
-
-                    // change fixed array
-                    fixedArr = temp;
-
-                    // confirm change
-                    cout << "New fixed array: [ ";
-                    for (int i = 0; i < fixedArr.size(); i++){
-                        cout << fixedArr[i] << " ";
-                    }
-                    cout << "]\n";
-                }
-
-                break; // success
-
-            }
-
-            // 3) Generate new array of random numbers 
-            case 3: {
-
-                // temp variables
-                int number;
-                vector<int> temp;
-
-                // prompt new number
-                cout << "\n----  Generate new random numbers  ----\n";
-                cout << "Enter integer number of elements (under 10,000): ";
-                cin >> number;
-
-                // validate input
-                if (cin.fail()){
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    cout << "\nInvalid input, returning to menu. No changes made." << endl;
-                    break; // failure
-                }
-
-                // between 0 - 10,000?
-                if (number < 1 || number > 10000) {
-                    cout << "\nInput out of range, returning to menu. No changes made.\n";
-                    break; // failure
-                }
-
-                // change random array
-                n = number;
-                for (int i = 0; i < n; i++){
-                    temp.push_back(rand() % (n + 1)); // random from 0 - new n + 1
-                }
-                randArr = temp;
-
-                // confirm change
-                cout << "New n elements for random array is now " << n << "\n";
-
-                break; // success
-
-            }
+            
 
             // 4) Generate outputs for all algorithms
             case 4: {
@@ -570,24 +482,181 @@ void arrayMenu(vector<int>& fixedArr, vector<int>& randArr, int& n) {
 
         switch (choice) {
 
-            case 1:
-                // Move your existing case 1 code here.
-                break;
+            
+            case 1: {
 
-            case 2:
-                // Move your existing case 2 code here.
-                break;
+                // Display current arrays
+                Utils::setColor(Utils::Color::BRIGHT_CYAN);
+                cout << "\n---------  Current Arrays  ---------\n";
+                Utils::resetColor();
 
-            case 3:
-                // Move your existing case 3 code here.
+                Utils::setColor(Utils::Color::BRIGHT_WHITE);
+                cout << "Current fixed array: ";
+                Utils::resetColor();
+
+                Utils::setColor(Utils::Color::BRIGHT_GREEN);
+                cout << "[ ";
+
+                for (int i = 0; i < fixedArr.size(); i++) {
+                    cout << fixedArr[i] << " ";
+                }
+
+                cout << "]";
+                Utils::resetColor();
+                cout << "\n";
+
+                Utils::setColor(Utils::Color::BRIGHT_WHITE);
+                cout << "Current n elements for random array: ";
+                Utils::resetColor();
+
+                Utils::setColor(Utils::Color::BRIGHT_YELLOW);
+                cout << n << "\n";
+                Utils::resetColor();
+
                 break;
+            }
+
+
+            // 2) Input new fixed array
+            case 2: {
+
+                // Temp variables
+                int element;
+                vector<int> temp(10);
+                bool failure = false;
+
+                // Prompt new array
+                Utils::setColor(Utils::Color::BRIGHT_CYAN);
+                cout << "\n-------  Input New Fixed Array  -------\n";
+                Utils::resetColor();
+
+                for (int i = 0; i < 10; i++) {
+
+                    Utils::setColor(Utils::Color::BRIGHT_YELLOW);
+                    cout << "Enter integer value for element " << i + 1 << ": ";
+                    Utils::resetColor();
+
+                    cin >> element;
+
+                    // Validate input
+                    if (cin.fail()) {
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                        Utils::setColor(Utils::Color::BRIGHT_RED);
+                        cout << "\n[ERROR] Invalid input. Returning to menu. No changes made.\n";
+                        Utils::resetColor();
+
+                        failure = true;
+                        break;
+                    }
+
+                    temp[i] = element;
+                }
+
+                // If valid
+                if (!failure) {
+
+                    // Change fixed array
+                    fixedArr = temp;
+
+                    // Confirm change
+                    Utils::setColor(Utils::Color::BRIGHT_GREEN);
+                    cout << "\n[SUCCESS] Fixed array updated successfully!\n";
+                    Utils::resetColor();
+
+                    Utils::setColor(Utils::Color::BRIGHT_WHITE);
+                    cout << "New fixed array: ";
+                    Utils::resetColor();
+
+                    Utils::setColor(Utils::Color::BRIGHT_GREEN);
+                    cout << "[ ";
+
+                    for (int i = 0; i < fixedArr.size(); i++) {
+                        cout << fixedArr[i] << " ";
+                    }
+
+                    cout << "]\n";
+                    Utils::resetColor();
+                }
+
+                break;
+            }
+
+
+            // 3) Generate new array of random numbers
+            case 3: {
+
+                // Temp variables
+                int number;
+                vector<int> temp;
+
+                // Prompt new number
+                Utils::setColor(Utils::Color::BRIGHT_CYAN);
+                cout << "\n----  Generate New Random Numbers  ----\n";
+                Utils::resetColor();
+
+                Utils::setColor(Utils::Color::BRIGHT_YELLOW);
+                cout << "Enter integer number of elements (1 - 10,000): ";
+                Utils::resetColor();
+
+                cin >> number;
+
+                // Validate input
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+                    Utils::setColor(Utils::Color::BRIGHT_RED);
+                    cout << "\n[ERROR] Invalid input. Returning to menu. No changes made.\n";
+                    Utils::resetColor();
+
+                    break;
+                }
+
+                // Between 1 - 10,000?
+                if (number < 1 || number > 10000) {
+
+                    Utils::setColor(Utils::Color::BRIGHT_RED);
+                    cout << "\n[ERROR] Input out of range. Returning to menu. No changes made.\n";
+                    Utils::resetColor();
+
+                    break;
+                }
+
+                // Change random array
+                n = number;
+
+                for (int i = 0; i < n; i++) {
+                    temp.push_back(rand() % (n + 1));
+                }
+
+                randArr = temp;
+
+                // Confirm change
+                Utils::setColor(Utils::Color::BRIGHT_GREEN);
+                cout << "\n[SUCCESS] Random array generated successfully!\n";
+                Utils::resetColor();
+
+                Utils::setColor(Utils::Color::BRIGHT_WHITE);
+                cout << "New array size: ";
+                Utils::resetColor();
+
+                Utils::setColor(Utils::Color::BRIGHT_YELLOW);
+                cout << n << " elements\n";
+                Utils::resetColor();
+
+                break;
+            }
+
 
             case 0:
-                return;
+                {return;}
 
-            default:
+            default: {
                 printError("Invalid menu option.");
                 break;
+            }
         }
 
         pauseScreen();
@@ -672,7 +741,7 @@ void printSuccess(const string& message) {
 // Error message
 void printError(const string& message) {
     Utils::setColor(Utils::Color::BRIGHT_RED);
-    cout << "[ERROR] " << message << "\n";
+    cout << "\n[ERROR] " << message << "\n";
     Utils::resetColor();
 }
 
