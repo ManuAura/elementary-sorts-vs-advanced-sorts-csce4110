@@ -168,6 +168,122 @@ namespace Benchmark {
         return result;
     }
 
+
+    // Run all five algorithms for one input size
+    vector<BenchmarkResult> benchmarkDataset(
+        const vector<int>& data,
+        int trials
+    ) {
+
+        vector<BenchmarkResult> results;
+
+        results.push_back(runAlgorithm("Bubble Sort", data, trials));
+        results.push_back(runAlgorithm("Selection Sort", data, trials));
+        results.push_back(runAlgorithm("Insertion Sort", data, trials));
+        results.push_back(runAlgorithm("Merge Sort", data, trials));
+        results.push_back(runAlgorithm("Quick Sort", data, trials));
+
+        return results;
+    }
+
+
+
+
+    // Print benchmark table
+    void printResults(const vector<BenchmarkResult>& results) {
+
+        Utils::setColor(Utils::Color::BRIGHT_CYAN);
+
+        cout << left
+             << setw(19) << "Algorithm"
+             << right
+             << setw(13) << "Comparisons"
+             << setw(13) << "Swaps"
+             << setw(13) << "Shifts"
+             << setw(16) << "Time (us)"
+             << "\n";
+
+        cout << string(74, '-') << "\n";
+
+        Utils::resetColor();
+
+        for (const BenchmarkResult& result : results) {
+
+            Utils::setColor(Utils::Color::BRIGHT_WHITE);
+
+            cout << left << setw(19) << result.algorithm;
+
+            Utils::setColor(Utils::Color::BRIGHT_YELLOW);
+
+            cout << right
+                 << setw(13) << result.comparisons;
+
+            if (result.swaps >= 0) {
+                cout << setw(13) << result.swaps;
+            }
+            else {
+                cout << setw(13) << "N/A";
+            }
+
+            if (result.shifts >= 0) {
+                cout << setw(13) << result.shifts;
+            }
+            else {
+                cout << setw(13) << "N/A";
+            }
+
+            cout << setw(16) << fixed << setprecision(2)
+                 << result.executionTime;
+
+            cout << "\n";
+
+            Utils::resetColor();
+        }
+
+        cout << string(74, '-') << "\n";
+    }
+
+
+
+    // Terminal comparison
+    void compareAlgorithms() {
+
+        Utils::clearScreen();
+
+        Utils::printHeader("ALGORITHM SCALABILITY COMPARISON");
+
+        const vector<int> inputSizes = {100, 1000, 10000};
+
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
+        cout << "Comparing five sorting algorithms using random datasets.\n";
+        cout << "Trials per algorithm: " << TERMINAL_TRIALS << "\n";
+        cout << "Execution time: Median of all trials.\n\n";
+        Utils::resetColor();
+
+        for (int n : inputSizes) {
+
+            Utils::setColor(Utils::Color::BRIGHT_CYAN);
+
+            cout << "\nINPUT SIZE: " << n << " ELEMENTS\n";
+            cout << string(74, '=') << "\n";
+
+            Utils::resetColor();
+
+            vector<int> data = generateRandomData(n);
+
+            vector<BenchmarkResult> results =
+                benchmarkDataset(data, TERMINAL_TRIALS);
+
+            printResults(results);
+        }
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
+        cout << "\n[SUCCESS] Benchmark comparison completed.\n";
+        Utils::resetColor();
+    }
+
+
+
     
 
 }
