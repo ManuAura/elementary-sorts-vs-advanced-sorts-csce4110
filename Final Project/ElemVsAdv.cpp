@@ -10,6 +10,7 @@
 
 #include "utils.h"
 #include <limits>
+#include <string>
 
 using namespace std;
 
@@ -239,6 +240,30 @@ void arrayMenu(vector<int>& fixedArr, vector<int>& randArr, int& n) {
                 cout << n << "\n";
                 Utils::resetColor();
 
+                // output random array
+                Utils::setColor(Utils::Color::BRIGHT_WHITE);
+                cout << "\nRandom Array: [ ";
+                Utils::resetColor();
+
+                Utils::setColor(Utils::Color::BRIGHT_GREEN);
+                int i = 0;
+                while (i < 100 && i < randArr.size())
+                {
+                    cout << randArr[i] << " ";
+                    i++;
+                }
+                
+                if (randArr.size() > 100){
+                    cout << "...";
+                }
+                Utils::resetColor();
+
+                Utils::setColor(Utils::Color::BRIGHT_WHITE);
+                cout << "]\n";
+                Utils::resetColor();
+
+                
+
                 break;
             }
 
@@ -288,7 +313,7 @@ void arrayMenu(vector<int>& fixedArr, vector<int>& randArr, int& n) {
 
                     // Confirm change
                     Utils::setColor(Utils::Color::BRIGHT_GREEN);
-                    cout << "\n[SUCCESS] Fixed array updated successfully!\n";
+                    cout << "\nFixed array updated successfully!\n";
                     Utils::resetColor();
 
                     Utils::setColor(Utils::Color::BRIGHT_WHITE);
@@ -618,13 +643,29 @@ void sortingMenu(const vector<int>& fixedArr, const vector<int>& randArr, int n)
                 Utils::setColor(Utils::Color::BRIGHT_GREEN);
                 cout    << "Comparisons = " << Sorts::getQuickComparisons() << "\n"
                         << "Swaps       = " << Sorts::getQuickSwaps() << "\n";
+
+                Utils::resetColor();
                 
 
-                // output sorted array
+                /// output sorted array
+                Utils::setColor(Utils::Color::BRIGHT_WHITE);
                 cout << "\nSorted Array: [ ";
-                for (int i = 0; i < bubble.size(); i++){
+                Utils::resetColor();
+
+                Utils::setColor(Utils::Color::BRIGHT_GREEN);
+                int i = 0;
+                while (i < 100 && i < bubble.size())
+                {
                     cout << bubble[i] << " ";
+                    i++;
                 }
+                
+                if (bubble.size() > 100){
+                    cout << "...";
+                }
+                Utils::resetColor();
+
+                Utils::setColor(Utils::Color::BRIGHT_WHITE);
                 cout << "]\n";
                 Utils::resetColor();
 
@@ -847,11 +888,27 @@ void correctnessMenu(const vector<int>& fixedArr, const vector<int>& randArr, in
 
 
                 // output sorted array
+                Utils::setColor(Utils::Color::BRIGHT_WHITE);
                 cout << "\nSorted Array: [ ";
-                for (int i = 0; i < bubble.size(); i++){
+                Utils::resetColor();
+
+                Utils::setColor(Utils::Color::BRIGHT_GREEN);
+                int i = 0;
+                while (i < 100 && i < bubble.size())
+                {
                     cout << bubble[i] << " ";
+                    i++;
                 }
+                
+                if (bubble.size() > 100){
+                    cout << "...";
+                }
+                Utils::resetColor();
+
+                Utils::setColor(Utils::Color::BRIGHT_WHITE);
                 cout << "]\n";
+                Utils::resetColor();
+                
 
                 break; // success
 
@@ -883,13 +940,15 @@ void pauseScreen() {
     Utils::resetColor();
 
     string temp;
-    getline(cin >> ws, temp);
+    getline(cin, temp);
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
 // Success message
 void printSuccess(const string& message) {
     Utils::setColor(Utils::Color::BRIGHT_GREEN);
-    cout << "\n[SUCCESS] " << message << "\n";
+    cout << "\n" << message << "\n";
     Utils::resetColor();
 }
 
