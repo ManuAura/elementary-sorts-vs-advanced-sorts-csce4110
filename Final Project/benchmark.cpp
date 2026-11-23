@@ -168,7 +168,7 @@ namespace Benchmark {
         return result;
     }
 
-
+    
     // Run all five algorithms for one input size
     vector<BenchmarkResult> benchmarkDataset(
         const vector<int>& data,
@@ -284,6 +284,97 @@ namespace Benchmark {
 
 
 
-    
+    // CSV export
+    void exportBenchmarkCSV(const string& filename) {
+
+        Utils::clearScreen();
+
+        Utils::printHeader("EXPORT BENCHMARK DATA");
+
+        ofstream file(filename);
+
+        if (!file.is_open()) {
+
+            Utils::setColor(Utils::Color::BRIGHT_RED);
+            cout << "[ERROR] Unable to create CSV file.\n";
+            Utils::resetColor();
+
+            return;
+        }
+
+        // CSV column headers
+        file << "Algorithm,Input Size,Comparisons,Swaps,Shifts,Execution Time (us)\n";
+
+        // Detailed input sizes: 100, 500, 1000 ... 5000
+        vector<int> inputSizes;
+
+        inputSizes.push_back(100);
+
+        for (int n = 500; n <= 5000; n += 500) {
+            inputSizes.push_back(n);
+        }
+
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
+
+        cout << "Preparing benchmark datasets...\n";
+        cout << "Input sizes: 100 to 5,000\n";
+        cout << "Increment: 500\n";
+        cout << "Trials per algorithm: " << CSV_TRIALS << "\n\n";
+
+        Utils::resetColor();
+
+        for (int n : inputSizes) {
+
+            vector<int> data = generateRandomData(n);
+
+            vector<BenchmarkResult> results =
+                benchmarkDataset(data, CSV_TRIALS);
+
+            for (const BenchmarkResult& result : results) {
+
+                file << result.algorithm << ","
+                     << result.inputSize << ","
+                     << result.comparisons << ",";
+
+                // Empty cells for non-applicable metrics
+                if (result.swaps >= 0) {
+                    file << result.swaps;
+                }
+
+                file << ",";
+
+                if (result.shifts >= 0) {
+                    file << result.shifts;
+                }
+
+                file << ","
+                     << fixed << setprecision(4)
+                     << result.executionTime
+                     << "\n";
+            }
+
+            Utils::setColor(Utils::Color::BRIGHT_GREEN);
+
+            cout << "[EXPORTED] n = "
+                 << setw(5) << right << n
+                 << " | 5 algorithms completed\n";
+
+            Utils::resetColor();
+        }
+
+        file.close();
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
+
+        cout << "\n[SUCCESS] CSV export completed!\n";
+
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
+
+        cout << "File: " << filename << "\n";
+        cout << "Total datasets: " << inputSizes.size() << "\n";
+        cout << "Total records: " << inputSizes.size() * 5 << "\n";
+
+        Utils::resetColor();
+    }
 
 }
