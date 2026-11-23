@@ -2,7 +2,8 @@
 // Sorts Class (contains all sorting algorithms)
 // Emmanuel Rojas, Osa Ibie-Idusuyi, Agraj Gautam 
 
-#include "Sorts.h"
+#include "sorts.h"
+#include "utils.h"
 using namespace std;
 
 // Initialize
@@ -23,10 +24,19 @@ void Sorts::bubbleSort(vector<int>& a, int& comparisons, int& swaps, bool correc
 
     // Correctness check: Before
     if (correctness) {
+        Utils::setColor(Utils::Color::BRIGHT_BLUE);
         cout << "\n-----  Bubble Correctness Check  -----\n";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
         cout << "Original Array: ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
         for (int num : a) cout << num << " ";
         cout << "\n";
+
+        Utils::resetColor();
     }
 
     for (int pass = 0; pass < n - 1; pass++) { 
@@ -44,9 +54,17 @@ void Sorts::bubbleSort(vector<int>& a, int& comparisons, int& swaps, bool correc
 
     // Correctness check: After
     if (correctness) {
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
         cout << "Resulted Array:  ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
         for (int num : a) cout << num << " ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_BLUE);
         cout << "\n---------------------------------------\n";
+        Utils::resetColor();
     }
 }
 
@@ -56,10 +74,18 @@ void Sorts::selectionSort(vector<int>& a, int& comparisons, int& swaps, bool cor
 
     // Correctness check: Before
     if (correctness) {
+        Utils::setColor(Utils::Color::BRIGHT_BLUE);
         cout << "\n----  Selection Correctness Check  ----\n";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
         cout << "Original Array: ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
         for (int num : a) cout << num << " ";
         cout << "\n";
+        Utils::resetColor();
     }
 
     for (int i = 0; i < n - 1; i++) { 
@@ -76,9 +102,17 @@ void Sorts::selectionSort(vector<int>& a, int& comparisons, int& swaps, bool cor
 
     // Correctness check: After
     if (correctness) {
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
         cout << "Resulted Array:  ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
         for (int num : a) cout << num << " ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_BLUE);
         cout << "\n---------------------------------------\n";
+        Utils::resetColor();
     }
 }
 
@@ -87,10 +121,18 @@ void Sorts::insertionSort(vector<int>& a, int& comparisons, int& shifts, bool co
     
     // Correctness check: Before
     if (correctness) {
+        Utils::setColor(Utils::Color::BRIGHT_BLUE);
         cout << "\n----  Insertion Correctness Check  ----\n";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
         cout << "Original Array: ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
         for (int num : a) cout << num << " ";
         cout << "\n";
+        Utils::resetColor();
     }
     
     for (int i = 1; i < a.size(); i++) { 
@@ -108,9 +150,17 @@ void Sorts::insertionSort(vector<int>& a, int& comparisons, int& shifts, bool co
 
     // Correctness check: After
     if (correctness) {
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
         cout << "Resulted Array: ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
         for (int num : a) cout << num << " ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_BLUE);
         cout << "\n---------------------------------------\n";
+        Utils::resetColor();
     }
 }
 
@@ -146,10 +196,18 @@ void Sorts::mergeCorrectness(vector<int>& a, bool correctness) {
     
     // Correctness check: Before
     if (correctness) {
+        Utils::setColor(Utils::Color::BRIGHT_BLUE);
         cout << "\n------  Merge Correctness Check  ------\n";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
         cout << "Original Array: ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
         for (int num : a) cout << num << " ";
         cout << "\n";
+        Utils::resetColor();
     }
 
     // Verify
@@ -159,9 +217,17 @@ void Sorts::mergeCorrectness(vector<int>& a, bool correctness) {
 
     // Correctness check: After
     if (correctness) {
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
         cout << "Resulted Array: ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
         for (int num : a) cout << num << " ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_BLUE);
         cout << "\n---------------------------------------\n";
+        Utils::resetColor();
     }
 }
 
@@ -201,10 +267,18 @@ void Sorts::quickCorrectness(vector<int>& a, bool correctness) {
     
     // Correctness check: Before
     if (correctness) {
+        Utils::setColor(Utils::Color::BRIGHT_BLUE);
         cout << "\n------  Quick Correctness Check  ------\n";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
         cout << "Original Array: ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
         for (int num : a) cout << num << " ";
         cout << "\n";
+        Utils::resetColor();
     }
 
     // Verify
@@ -214,8 +288,16 @@ void Sorts::quickCorrectness(vector<int>& a, bool correctness) {
 
     // Correctness check: After
     if (correctness) {
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
         cout << "Resulted Array: ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_GREEN);
         for (int num : a) cout << num << " ";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_BLUE);
         cout << "\n---------------------------------------\n";
+        Utils::resetColor();
     }
 }
