@@ -21,6 +21,8 @@ namespace Utils {
 
     void resetColor() {
         std::cout << RESET;
+        setBackground(Background::BLACK);
+        setColor(Color::BRIGHT_WHITE);
     }
 
     void setColor(Color color) {

@@ -11,6 +11,7 @@
 #include "utils.h"
 #include <limits>
 #include <string>
+#include "benchmark.h"
 
 using namespace std;
 
@@ -28,7 +29,8 @@ void arrayMenu(vector<int>& fixedArr, vector<int>& randArr, int& n);
 void sortingMenu(const vector<int>& fixedArr, const vector<int>& randArr, int n);
 void correctnessMenu(const vector<int>& fixedArr, const vector<int>& randArr, int n);
 
-void printArr(const vector<int>& arr);
+
+void benchmarkMenu();
 
 
 /* MAIN */
@@ -105,6 +107,13 @@ int main(){
 
             }
 
+            case 4: {
+                // goto benchmark menu
+                benchmarkMenu();
+                Utils::clearScreen();
+                break;
+            }
+
             // 0) Exit
             case 0: {
                 
@@ -146,6 +155,7 @@ void menu() {
     cout << "  1. Array Management\n";
     cout << "  2. Sorting Algorithm Comparison\n";
     cout << "  3. Correctness Verification\n";
+    cout << "  4. Scalability Analysis\n";
     cout << "  0. Exit Program\n";
 
     Utils::resetColor();
@@ -928,6 +938,93 @@ void correctnessMenu(const vector<int>& fixedArr, const vector<int>& randArr, in
         pauseScreen();
     }
 }
+
+
+
+
+/* BENCHMARK MENU */
+
+void benchmarkMenu() {
+
+    int choice;
+
+    while (true) {
+
+        Utils::clearScreen();
+
+        Utils::printHeader("SCALABILITY ANALYSIS");
+
+        Utils::setColor(Utils::Color::BRIGHT_WHITE);
+
+        cout << "  1. Compare Sorting Algorithms\n";
+        cout << "  2. Export Benchmark Data to CSV\n";
+        cout << "  0. Back to Main Menu\n";
+
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_CYAN);
+        cout << "\n--------------------------------------------\n";
+        Utils::resetColor();
+
+        Utils::setColor(Utils::Color::BRIGHT_YELLOW);
+        cout << "  Enter Choice: ";
+        Utils::resetColor();
+
+        cin >> choice;
+
+        if (cin.fail()) {
+
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            Utils::setColor(Utils::Color::BRIGHT_RED);
+            cout << "\n[ERROR] Invalid input. Enter a number.\n";
+            Utils::resetColor();
+
+            pauseScreen();
+            continue;
+        }
+
+        switch (choice) {
+
+            // Compare algorithms
+            case 1: {
+
+                Benchmark::compareAlgorithms();
+                pauseScreen();
+
+                break;
+            }
+
+            // Export CSV
+            case 2: {
+
+                Benchmark::exportBenchmarkCSV();
+                pauseScreen();
+
+                break;
+            }
+
+            // Back
+            case 0:
+                return;
+
+            // Invalid input
+            default: {
+
+                Utils::setColor(Utils::Color::BRIGHT_RED);
+                cout << "\n[ERROR] Invalid menu option.\n";
+                Utils::resetColor();
+
+                pauseScreen();
+
+                break;
+            }
+        }
+    }
+}
+
+
 
 
 /* TERMINAL UI FUNCTIONS */
